@@ -62,3 +62,11 @@ if __name__ == '__main__':
   df = pd.DataFrame(extracted_records,columns=['Raag_label', 'Hymn_Text'])
   logging.info(f"DataFrame built successfully with {len(df)} records.")
   print(df.head())
+  output_path = Path("/content/drive/MyDrive/Raag_Classification_ML_Project/data/interim/extracted_gurbani.csv")
+  try:
+    gurbani_data_extractor.logger.info(f"Saving extracted data to {output_path}")
+    df.to_csv(output_path,index=False)
+    gurbani_data_extractor.logger.info("Data Successfully saved to interim storage.")
+    
+  except OSError as e:
+    gurbani_data_extractor.logger.error(f"Failed to save data to disk: {e}")  
